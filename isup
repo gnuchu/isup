@@ -1,13 +1,23 @@
 #!/usr/bin/env bash
 
+set -o errexit
+set -o nounset
+set -o pipefail
+
+if [[ "$1" == "--help" ]] || [[ "$1" == "-help" ]] || [[ "$1" == "-h" ]] || [[ "$1" == "-?" ]]
+then
+    echo "Some help text"
+    exit 0
+fi
+
 HOST=$1
-if [ "$HOST" == "" ]
+if [[ "$HOST" == "" ]]
 then
     echo "Please pass a host"
     exit 1
 fi
 
-if [ "$2" == "" ]
+if [ "${2-}" == "" ]
 then
     PORT=22
 else
@@ -15,7 +25,8 @@ else
 fi
 
 echo "Checking $HOST"
-until nc -vzw 2 $HOST $PORT; 
+until nc -vzw 2 "$HOST" "$PORT"; 
     do sleep 2; 
 done
+
 exit 0

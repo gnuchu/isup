@@ -1,6 +1,7 @@
 import unittest
 import subprocess
 import re
+import green
 
 HOSTNAME="68.183.37.68"
 PORT="22"
