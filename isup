@@ -3,10 +3,19 @@
 HOST=$1
 if [ "$HOST" == "" ]
 then
-        echo "Please pass a host"
-        exit 1
+    echo "Please pass a host"
+    exit 1
+fi
+
+if [ "$2" == "" ]
+then
+    PORT=22
+else
+    PORT=$2
 fi
 
 echo "Checking $HOST"
-until nc -vzw 2 $HOST 22; do sleep 2; done
+until nc -vzw 2 $HOST $PORT; 
+    do sleep 2; 
+done
 exit 0
